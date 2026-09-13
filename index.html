@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Week 4 - JavaScript Advanced</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+            padding: 20px;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+
+        section h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+
+        .practice-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+
+        .practice-box h3 {
+            margin-bottom: 15px;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+
+        button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #1e3a8a;
+            color: white;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+
+        .edit-btn {
+            background: #f59e0b;
+        }
+
+
+        .delete-btn {
+            background: #dc2626;
+        }
+
+
+        .reset-btn {
+            background: #64748b;
+        }
+
+
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+
+        .quote {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+
+        /* SEARCH & FILTER */
+
+        .filter-area {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+
+        .filter-area input,
+        .filter-area select {
+            margin: 0;
+        }
+
+
+        .filter-area button {
+            margin: 0;
+            white-space: nowrap;
+        }
+
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            color: red;
+            font-weight: bold;
+        }
+
+
+        /* DATA NOT FOUND */
+
+        .data-not-found {
+            text-align: center;
+            padding: 25px;
+            color: #dc2626;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+
+        .stat-card {
+            flex: 1;
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+
+        .stat-card h3 {
+            font-size: 28px;
+            color: #1e3a8a;
+        }
+
+
+        .search-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .filter-area {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-area button {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>
+            Week 4 – JavaScript Advanced
+        </h1>
+
+        <p>
+            Student Management Dashboard
+        </p>
+
+    </header>
+
+
+
+    <!-- ===================================== -->
+    <!-- PRACTICE 1 - LOCAL STORAGE -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <h2>
+            Practice 1 – Local Storage
+        </h2>
+
+
+        <div class="practice-box">
+
+            <h3>
+                Store User Name in localStorage
+            </h3>
+
+
+            <input
+                type="text"
+                id="userName"
+                placeholder="Enter your name"
+            >
+
+
+            <button onclick="saveUserName()">
+
+                Save Name
+
+            </button>
+
+
+            <p
+                id="storedName"
+                class="success">
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- PRACTICE 2 - EMAIL VALIDATION -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <h2>
+            Practice 2 – Email Validation
+        </h2>
+
+
+        <div class="practice-box">
+
+            <h3>
+                Validate Email Using JavaScript
+            </h3>
+
+
+            <input
+                type="email"
+                id="emailInput"
+                placeholder="Enter your email"
+            >
+
+
+            <button onclick="validateEmail()">
+
+                Validate Email
+
+            </button>
+
+
+            <p id="emailMessage"></p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- PRACTICE 3 - API FETCH -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <h2>
+            Practice 3 – API Fetch
+        </h2>
+
+
+        <div class="practice-box">
+
+            <h3>
+                Random Quote API
+            </h3>
+
+
+            <button onclick="fetchQuote()">
+
+                Get Random Quote
+
+            </button>
+
+
+            <div
+                id="quoteResult"
+                class="quote">
+
+                Click the button to load a quote.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- PRACTICE 4 - ARROW FUNCTION -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <h2>
+            Practice 4 – ES6 Arrow Function
+        </h2>
+
+
+        <div class="practice-box">
+
+            <h3>
+                Filter Numbers Greater Than 50
+            </h3>
+
+
+            <p>
+
+                Original Array:
+
+                <strong id="originalNumbers"></strong>
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                Numbers Greater Than 50:
+
+                <strong id="filteredNumbers"></strong>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================== -->
+    <!-- STUDENT MANAGEMENT DASHBOARD -->
+    <!-- ===================================== -->
+
+    <section>
+
+        <h2>
+            Student Management Dashboard
+        </h2>
+
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <h3 id="totalStudents">
+                    0
+                </h3>
+
+                <p>
+                    Total Students
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3 id="maleStudents">
+                    0
+                </h3>
+
+                <p>
+                    Male Students
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3 id="femaleStudents">
+                    0
+                </h3>
+
+                <p>
+                    Female Students
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- ADD STUDENT FORM -->
+        <!-- ================================= -->
+
+        <div class="practice-box">
+
+
+            <h3 id="formTitle">
+                Add Student
+            </h3>
+
+
+            <div class="form-grid">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Student Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        placeholder="Enter student name"
+                    >
+
+                </div>
+
+
+
+                <!-- AGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Age
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="studentAge"
+                        placeholder="Enter age"
+                    >
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="studentEmail"
+                        placeholder="Enter email"
+                    >
+
+                </div>
+
+
+
+                <!-- GENDER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Gender
+                    </label>
+
+
+                    <select id="studentGender">
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- COURSE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Course
+                    </label>
+
+
+                    <select id="studentCourse">
+
+                        <option value="">
+                            Select Course
+                        </option>
+
+                        <option value="MBBS">
+                            MBBS
+                        </option>
+
+                        <option value="B.Tech">
+                            B.Tech
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                        <option value="B.Sc">
+                            B.Sc
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Phone
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="studentPhone"
+                        placeholder="Enter phone number"
+                    >
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="full-width">
+
+
+                    <button
+                        onclick="addOrUpdateStudent()">
+
+                        <span id="submitButtonText">
+                            Add Student
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="clearForm()"
+                        type="button">
+
+                        Clear
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <p id="formMessage"></p>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- SEARCH & FILTER -->
+        <!-- ================================= -->
+
+        <h3>
+            Search & Filter Students
+        </h3>
+
+
+        <div class="filter-area">
+
+
+            <!-- SEARCH BOX -->
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by ID, name, age, email, course or phone..."
+            >
+
+
+            <!-- GENDER FILTER -->
+
+            <select id="genderFilter">
+
+                <option value="All">
+                    All Genders
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button
+                onclick="displayStudents()">
+
+                🔍 Search
+
+            </button>
+
+
+            <!-- RESET BUTTON -->
+
+            <button
+                class="reset-btn"
+                onclick="resetFilters()">
+
+                🔄 Reset
+
+            </button>
+
+
+        </div>
+
+
+        <p
+            id="searchInfo"
+            class="search-info">
+        </p>
+
+
+
+        <!-- ================================= -->
+        <!-- STUDENT TABLE -->
+        <!-- ================================= -->
+
+        <div style="overflow-x:auto;">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Age
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Gender
+                        </th>
+
+                        <th>
+                            Course
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="studentTableBody">
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+
+    // =========================================
+    // PRACTICE 1
+    // LOCAL STORAGE
+    // =========================================
+
+
+    function saveUserName() {
+
+
+        const name =
+            document.getElementById("userName")
+            .value
+            .trim();
+
+
+        if (name === "") {
+
+            alert("Please enter your name.");
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "userName",
+            name
+        );
+
+
+        displayStoredName();
+
+    }
+
+
+
+    function displayStoredName() {
+
+
+        const savedName =
+            localStorage.getItem(
+                "userName"
+            );
+
+
+        const storedName =
+            document.getElementById(
+                "storedName"
+            );
+
+
+        if (savedName) {
+
+            storedName.textContent =
+                "Welcome, " +
+                savedName +
+                "! Your name is stored in localStorage.";
+
+        }
+
+        else {
+
+            storedName.textContent = "";
+
+        }
+
+    }
+
+
+    // Display saved name after reload
+
+    displayStoredName();
+
+
+
+    // =========================================
+    // PRACTICE 2
+    // EMAIL VALIDATION
+    // =========================================
+
+
+    function validateEmail() {
+
+
+        const email =
+            document.getElementById(
+                "emailInput"
+            )
+            .value
+            .trim();
+
+
+        const message =
+            document.getElementById(
+                "emailMessage"
+            );
+
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            emailPattern.test(email)
+        ) {
+
+
+            message.textContent =
+                "✓ Valid email address";
+
+
+            message.className =
+                "success";
+
+        }
+
+        else {
+
+
+            message.textContent =
+                "✗ Invalid email address";
+
+
+            message.className =
+                "error";
+
+        }
+
+    }
+
+
+
+    // =========================================
+    // PRACTICE 3
+    // API FETCH
+    // =========================================
+
+
+    async function fetchQuote() {
+
+
+        const quoteResult =
+            document.getElementById(
+                "quoteResult"
+            );
+
+
+        quoteResult.textContent =
+            "Loading quote...";
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "https://dummyjson.com/quotes/random"
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to fetch quote"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            quoteResult.innerHTML =
+                `
+                <strong>
+                    "${data.quote}"
+                </strong>
+
+                <br><br>
+
+                — ${data.author}
+                `;
+
+        }
+
+
+        catch (error) {
+
+
+            quoteResult.textContent =
+                "Unable to load quote. Please try again.";
+
+
+            console.error(error);
+
+        }
+
+    }
+
+
+
+    // =========================================
+    // PRACTICE 4
+    // ES6 ARROW FUNCTION
+    // =========================================
+
+
+    const numbers =
+        [
+            10,
+            25,
+            45,
+            55,
+            60,
+            72,
+            80,
+            90
+        ];
+
+
+    const numbersGreaterThan50 =
+        numbers.filter(
+            number => number > 50
+        );
+
+
+    document.getElementById(
+        "originalNumbers"
+    )
+    .textContent =
+        numbers.join(", ");
+
+
+    document.getElementById(
+        "filteredNumbers"
+    )
+    .textContent =
+        numbersGreaterThan50.join(", ");
+
+
+
+    // =========================================
+    // STUDENT MANAGEMENT DASHBOARD
+    // =========================================
+
+
+    let students =
+        JSON.parse(
+            localStorage.getItem(
+                "students"
+            )
+        ) || [];
+
+
+    let editingStudentId =
+        null;
+
+
+
+    // =========================================
+    // ADD OR UPDATE STUDENT
+    // =========================================
+
+
+    function addOrUpdateStudent() {
+
+
+        const name =
+            document.getElementById(
+                "studentName"
+            )
+            .value
+            .trim();
+
+
+        const age =
+            document.getElementById(
+                "studentAge"
+            )
+            .value
+            .trim();
+
+
+        const email =
+            document.getElementById(
+                "studentEmail"
+            )
+            .value
+            .trim();
+
+
+        const gender =
+            document.getElementById(
+                "studentGender"
+            )
+            .value;
+
+
+        const course =
+            document.getElementById(
+                "studentCourse"
+            )
+            .value;
+
+
+        const phone =
+            document.getElementById(
+                "studentPhone"
+            )
+            .value
+            .trim();
+
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+
+
+        // CHECK EMPTY FIELDS
+
+        if (
+
+            name === "" ||
+
+            age === "" ||
+
+            email === "" ||
+
+            gender === "" ||
+
+            course === "" ||
+
+            phone === ""
+
+        ) {
+
+
+            formMessage.textContent =
+                "Please fill all fields.";
+
+
+            formMessage.className =
+                "error";
+
+
+            return;
+
+        }
+
+
+
+        // EMAIL VALIDATION
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            !emailPattern.test(email)
+        ) {
+
+
+            formMessage.textContent =
+                "Please enter a valid email.";
+
+
+            formMessage.className =
+                "error";
+
+
+            return;
+
+        }
+
+
+
+        // =====================================
+        // UPDATE EXISTING STUDENT
+        // =====================================
+
+
+        if (
+            editingStudentId !== null
+        ) {
+
+
+            students =
+                students.map(
+                    student => {
+
+
+                        if (
+                            student.id ===
+                            editingStudentId
+                        ) {
+
+
+                            return {
+
+                                ...student,
+
+                                name: name,
+
+                                age: age,
+
+                                email: email,
+
+                                gender: gender,
+
+                                course: course,
+
+                                phone: phone
+
+                            };
+
+                        }
+
+
+                        return student;
+
+                    }
+                );
+
+
+            formMessage.textContent =
+                "Student updated successfully.";
+
+
+            formMessage.className =
+                "success";
+
+
+            editingStudentId =
+                null;
+
+
+            document.getElementById(
+                "formTitle"
+            )
+            .textContent =
+                "Add Student";
+
+
+            document.getElementById(
+                "submitButtonText"
+            )
+            .textContent =
+                "Add Student";
+
+        }
+
+
+
+        // =====================================
+        // ADD NEW STUDENT
+        // =====================================
+
+
+        else {
+
+
+            const newStudent = {
+
+
+                id:
+                    Date.now(),
+
+
+                name:
+                    name,
+
+
+                age:
+                    age,
+
+
+                email:
+                    email,
+
+
+                gender:
+                    gender,
+
+
+                course:
+                    course,
+
+
+                phone:
+                    phone
+
+            };
+
+
+            students.push(
+                newStudent
+            );
+
+
+            formMessage.textContent =
+                "Student added successfully.";
+
+
+            formMessage.className =
+                "success";
+
+        }
+
+
+
+        // SAVE DATA
+
+        saveStudents();
+
+
+        // UPDATE TABLE
+
+        displayStudents();
+
+
+        // CLEAR FORM
+
+        clearFormFields();
+
+    }
+
+
+
+    // =========================================
+    // SAVE STUDENTS
+    // =========================================
+
+
+    function saveStudents() {
+
+
+        localStorage.setItem(
+
+            "students",
+
+            JSON.stringify(students)
+
+        );
+
+    }
+
+
+
+    // =========================================
+    // DISPLAY / SEARCH / FILTER STUDENTS
+    // =========================================
+
+
+    function displayStudents() {
+
+
+        const tableBody =
+            document.getElementById(
+                "studentTableBody"
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+
+        const genderFilter =
+            document.getElementById(
+                "genderFilter"
+            );
+
+
+        const searchInfo =
+            document.getElementById(
+                "searchInfo"
+            );
+
+
+        const searchText =
+            searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+        const selectedGender =
+            genderFilter.value;
+
+
+        tableBody.innerHTML = "";
+
+
+
+        // =====================================
+        // FILTER STUDENTS
+        // =====================================
+
+
+        const filteredStudents =
+            students.filter(
+                student => {
+
+
+                    const matchesSearch =
+
+
+                        String(student.id)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.name)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.age)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.email)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.gender)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.course)
+                        .toLowerCase()
+                        .includes(searchText)
+
+
+                        ||
+
+
+                        String(student.phone)
+                        .toLowerCase()
+                        .includes(searchText);
+
+
+
+                    const matchesGender =
+
+                        selectedGender ===
+                        "All"
+
+                        ||
+
+                        student.gender ===
+                        selectedGender;
+
+
+
+                    return (
+
+                        matchesSearch
+                        &&
+                        matchesGender
+
+                    );
+
+                }
+            );
+
+
+
+        // =====================================
+        // NO DATA FOUND
+        // =====================================
+
+
+        if (
+            filteredStudents.length === 0
+        ) {
+
+
+            tableBody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="data-not-found">
+
+                        ❌ Data not found
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            searchInfo.textContent =
+                searchText !== ""
+                ? `No student found for "${searchText}".`
+                : "No students available.";
+
+
+            updateStatistics();
+
+
+            return;
+
+        }
+
+
+
+        // =====================================
+        // DISPLAY DATA
+        // =====================================
+
+
+        searchInfo.textContent =
+            `Showing ${filteredStudents.length} student(s).`;
+
+
+
+        filteredStudents.forEach(
+            student => {
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${student.id}
+                    </td>
+
+
+                    <td>
+                        ${student.name}
+                    </td>
+
+
+                    <td>
+                        ${student.age}
+                    </td>
+
+
+                    <td>
+                        ${student.email}
+                    </td>
+
+
+                    <td>
+                        ${student.gender}
+                    </td>
+
+
+                    <td>
+                        ${student.course}
+                    </td>
+
+
+                    <td>
+                        ${student.phone}
+                    </td>
+
+
+                    <td>
+
+
+                        <button
+                            class="edit-btn"
+                            onclick="editStudent(${student.id})">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteStudent(${student.id})">
+
+                            Delete
+
+                        </button>
+
+
+                    </td>
+
+                `;
+
+
+                tableBody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        updateStatistics();
+
+    }
+
+
+
+    // =========================================
+    // EDIT STUDENT
+    // =========================================
+
+
+    function editStudent(id) {
+
+
+        const student =
+            students.find(
+                student =>
+                    student.id === id
+            );
+
+
+        if (!student) {
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "studentName"
+        )
+        .value =
+            student.name;
+
+
+        document.getElementById(
+            "studentAge"
+        )
+        .value =
+            student.age;
+
+
+        document.getElementById(
+            "studentEmail"
+        )
+        .value =
+            student.email;
+
+
+        document.getElementById(
+            "studentGender"
+        )
+        .value =
+            student.gender;
+
+
+        document.getElementById(
+            "studentCourse"
+        )
+        .value =
+            student.course;
+
+
+        document.getElementById(
+            "studentPhone"
+        )
+        .value =
+            student.phone;
+
+
+        editingStudentId =
+            student.id;
+
+
+        document.getElementById(
+            "formTitle"
+        )
+        .textContent =
+            "Edit Student";
+
+
+        document.getElementById(
+            "submitButtonText"
+        )
+        .textContent =
+            "Update Student";
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+
+    // =========================================
+    // DELETE STUDENT
+    // =========================================
+
+
+    function deleteStudent(id) {
+
+
+        const confirmDelete =
+            confirm(
+                "Are you sure you want to delete this student?"
+            );
+
+
+        if (!confirmDelete) {
+
+            return;
+
+        }
+
+
+        students =
+            students.filter(
+                student =>
+                    student.id !== id
+            );
+
+
+        saveStudents();
+
+
+        displayStudents();
+
+    }
+
+
+
+    // =========================================
+    // CLEAR FORM FIELDS
+    // =========================================
+
+
+    function clearFormFields() {
+
+
+        document.getElementById(
+            "studentName"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "studentAge"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "studentEmail"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "studentGender"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "studentCourse"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "studentPhone"
+        )
+        .value = "";
+
+    }
+
+
+
+    // =========================================
+    // CLEAR FORM
+    // =========================================
+
+
+    function clearForm() {
+
+
+        clearFormFields();
+
+
+        editingStudentId =
+            null;
+
+
+        document.getElementById(
+            "formTitle"
+        )
+        .textContent =
+            "Add Student";
+
+
+        document.getElementById(
+            "submitButtonText"
+        )
+        .textContent =
+            "Add Student";
+
+
+        document.getElementById(
+            "formMessage"
+        )
+        .textContent = "";
+
+    }
+
+
+
+    // =========================================
+    // RESET SEARCH AND FILTER
+    // =========================================
+
+
+    function resetFilters() {
+
+
+        document.getElementById(
+            "searchInput"
+        )
+        .value = "";
+
+
+        document.getElementById(
+            "genderFilter"
+        )
+        .value =
+            "All";
+
+
+        document.getElementById(
+            "searchInfo"
+        )
+        .textContent = "";
+
+
+        displayStudents();
+
+    }
+
+
+
+    // =========================================
+    // UPDATE STATISTICS
+    // =========================================
+
+
+    function updateStatistics() {
+
+
+        document.getElementById(
+            "totalStudents"
+        )
+        .textContent =
+            students.length;
+
+
+
+        const maleCount =
+            students.filter(
+                student =>
+                    student.gender ===
+                    "Male"
+            )
+            .length;
+
+
+
+        const femaleCount =
+            students.filter(
+                student =>
+                    student.gender ===
+                    "Female"
+            )
+            .length;
+
+
+
+        document.getElementById(
+            "maleStudents"
+        )
+        .textContent =
+            maleCount;
+
+
+
+        document.getElementById(
+            "femaleStudents"
+        )
+        .textContent =
+            femaleCount;
+
+    }
+
+
+
+    // =========================================
+    // INITIAL DISPLAY
+    // =========================================
+
+
+    displayStudents();
+
+
+</script>
+
+
+</body>
+
+</html>
